@@ -9,6 +9,6 @@ const userRoute = express.Router();
 userRoute.post('/phone-login', loggingUsingPhoneController);
 userRoute.post('/verifying-otp', OtpVerificationController);
 userRoute.get('/', authentication, fetchUserDetailsController);
-userRoute.post('/update', upload.single('profileFileName'), authentication, updatingUserDetailsController);
+userRoute.post('/update', upload.single('image'), authentication, updatingUserDetailsController);
 
 module.exports = userRoute;
