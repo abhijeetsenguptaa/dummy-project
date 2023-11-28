@@ -39,6 +39,7 @@ app.get('/', (req, res) => {
     }
 });
 
+app.use('/uploads', express.static('uploads'));
 app.use('/users', userRoute);
 
 // Synchronize the database connection and start the server
