@@ -9,6 +9,9 @@ const cors = require('cors');
 const connection = require('./configs/connection');
 const userRoute = require('./routes/user.routes');
 const addressRoute = require('./routes/address.routes');
+const countryRoute = require('./routes/country.routes');
+const stateRoute = require('./routes/state.routes');
+const cityRoute = require('./routes/city.routes');
 
 // Set the port for the server to run on, defaulting to 7000 if not specified in the environment
 const PORT = process.env.PORT || 7000;
@@ -43,6 +46,9 @@ app.get('/', (req, res) => {
 app.use('/uploads', express.static('uploads'));
 app.use('/users', userRoute);
 app.use('/address', addressRoute);
+app.use('/countries', countryRoute);
+app.use('/states', stateRoute);
+app.use('/cities', cityRoute);
 
 // Synchronize the database connection and start the server
 connection.sync().then(() => {
