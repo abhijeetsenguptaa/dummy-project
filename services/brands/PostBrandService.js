@@ -2,7 +2,7 @@ const Brand = require("../../models/brand.model")
 
 async function PostBrandService(name, slug, logo, status) {
     try {
-        const brandPost = new Brand.create({ name, slug, logo, status });
+        const brandPost = await Brand.create({ name, slug, logo, status });
 
         return {
             status: true,
