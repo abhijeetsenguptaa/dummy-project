@@ -57,8 +57,10 @@ async function updateBrandController(req, res) {
         // Extracting brand ID from the request parameters
         const id = req.params.id;
 
+        const { name, slug, logo, status } = req.body;
+        
         // Calling the service to handle brand data update
-        const updateBrandData = await UpdateBrandService(id);
+        const updateBrandData = await UpdateBrandService(id, name, slug, logo, status );
 
         // Sending response based on the service result
         return res.status(updateBrandData.status ? 200 : 404).json({

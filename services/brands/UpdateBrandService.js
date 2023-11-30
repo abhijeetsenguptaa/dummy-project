@@ -28,9 +28,12 @@ async function UpdateBrandService(id, name, slug, logo, status) {
             data: existingBrand,
         };
     } catch (error) {
+        console.error(error); // Log the complete error for debugging purposes
+
         return {
             status: false,
-            message: error.message,
+            message: 'Error in updating the brand.',
+            error: error.message, // Include the error message in the response
         };
     }
 }

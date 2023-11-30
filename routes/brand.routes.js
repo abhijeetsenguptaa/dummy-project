@@ -6,7 +6,7 @@ const BrandRoute = express.Router();
 
 BrandRoute.post('/', postBrandController);
 BrandRoute.get('/', fetchBrandController);
-BrandRoute.put('/:id', updateBrandController);
+BrandRoute.post('/:id', updateBrandController);
 BrandRoute.delete('/:id', deleteBrandController);
 
 module.exports = BrandRoute;
