@@ -2,14 +2,6 @@ const Brand = require("../../models/brand.model");
 
 async function DeleteBrandService(id) {
     try {
-        // Input validation
-        if (!Number.isInteger(id) || id <= 0) {
-            return {
-                status: false,
-                message: 'Invalid brand ID provided.',
-            };
-        }
-
         // Find the brand by ID
         const existingBrand = await Brand.findByPk(id);
 

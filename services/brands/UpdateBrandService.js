@@ -2,14 +2,6 @@ const Brand = require("../../models/brand.model");
 
 async function UpdateBrandService(id, name, slug, logo, status) {
     try {
-        // Input validation
-        if (!Number.isInteger(id) || id <= 0) {
-            return {
-                status: false,
-                message: 'Invalid brand ID provided.',
-            };
-        }
-
         // Fetch the brand by ID
         const existingBrand = await Brand.findByPk(id);
 
