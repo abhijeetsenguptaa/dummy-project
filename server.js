@@ -12,6 +12,7 @@ const addressRoute = require('./routes/address.routes');
 const countryRoute = require('./routes/country.routes');
 const stateRoute = require('./routes/state.routes');
 const cityRoute = require('./routes/city.routes');
+const BrandRoute = require('./routes/brand.routes');
 
 // Set the port for the server to run on, defaulting to 7000 if not specified in the environment
 const PORT = process.env.PORT || 7000;
@@ -49,6 +50,7 @@ app.use('/address', addressRoute);
 app.use('/countries', countryRoute);
 app.use('/states', stateRoute);
 app.use('/cities', cityRoute);
+app.use('/brands', BrandRoute);
 
 // Synchronize the database connection and start the server
 connection.sync().then(() => {
