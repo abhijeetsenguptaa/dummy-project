@@ -36,7 +36,7 @@ const Address = connection.define('addresses', {
             model: Country,
             key: 'id'
         },
-        defaultValue: 0
+        defaultValue: null
     },
     state_id: {
         type: DataTypes.INTEGER,
@@ -45,7 +45,7 @@ const Address = connection.define('addresses', {
             model: State,
             key: 'id'
         },
-        defaultValue: 0
+        defaultValue: null
     },
     city_id: {
         type: DataTypes.INTEGER,
@@ -54,7 +54,7 @@ const Address = connection.define('addresses', {
             model: City,
             key: 'id'
         },
-        defaultValue: 0
+        defaultValue: null
     },
     address: {
         type: DataTypes.STRING,
