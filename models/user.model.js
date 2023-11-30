@@ -2,7 +2,7 @@ const connection = require("../configs/connection");
 const City = require("./city.model");
 const Country = require("./country.model");
 const State = require("./state.model");
-const { DataTypes } = require("sequelize");
+const { DataTypes, literal } = require("sequelize");
 
 const User = connection.define('users', {
     name: {
@@ -107,14 +107,14 @@ const User = connection.define('users', {
     },
     created_at: {
         type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: DataTypes.NOW,
+        allowNull: false,
+        defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     updated_at: {
         type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: DataTypes.NOW,
-    }
+        allowNull: false,
+        defaultValue: literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    },
 }, {
     timestamps: false,
 })

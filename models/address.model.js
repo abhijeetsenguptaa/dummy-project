@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, literal } = require("sequelize");
 const connection = require('../configs/connection');
 const User = require('./user.model');
 const Country = require('./country.model');
@@ -77,13 +77,13 @@ const Address = connection.define('addresses', {
     created_at: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
+        defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
-    }
+        defaultValue: literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    },
 }, {
     timestamps: false,
 })

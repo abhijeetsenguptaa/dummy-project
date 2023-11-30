@@ -1,4 +1,4 @@
-const Address = require("../../models/address.mode");
+const Address = require("../../models/address.model");
 
 async function AddAddressService(userID, name, email, phone, country_id, state_id, city_id, address, type, default_shipping, default_billing) {
     try {

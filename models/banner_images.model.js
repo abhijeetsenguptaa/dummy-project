@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, literal } = require("sequelize");
 const connection = require("../configs/connection");
 
 const Banner_Image = connection.define({
@@ -51,13 +51,13 @@ const Banner_Image = connection.define({
     created_at: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
+        defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
-    }
+        defaultValue: literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    },
 }, {
     timestamps: false
 })

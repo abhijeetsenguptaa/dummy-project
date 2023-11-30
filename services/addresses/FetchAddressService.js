@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const Address = require("../../models/address.mode");
+const Address = require("../../models/address.model");
 const Country = require("../../models/country.model");
 const State = require("../../models/state.model");
 const City = require("../../models/city.model");

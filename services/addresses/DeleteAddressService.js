@@ -1,4 +1,4 @@
-const Address = require("../../models/address.mode");
+const Address = require("../../models/address.model");
 
 async function DeleteAddressService(id){
     try {

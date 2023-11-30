@@ -1,5 +1,6 @@
 const connection = require("../configs/connection");
-const { DataTypes } = require("sequelize");
+const { DataTypes, literal } = require("sequelize");
+
 
 const Otp_Verify = connection.define('otps_verify', {
     phone: {
@@ -16,14 +17,14 @@ const Otp_Verify = connection.define('otps_verify', {
     },
     created_at: {
         type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: DataTypes.NOW,
+        allowNull: false,
+        defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     updated_at: {
         type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: DataTypes.NOW,
-    }
+        allowNull: false,
+        defaultValue: literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    },
 }, {
     timestamps: false
 })
