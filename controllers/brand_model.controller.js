@@ -2,15 +2,15 @@ const FetchBrandModelService = require("../services/brand_models/FetchBrandModel
 
 async function fetchBrandModelController(req, res) {
     try {
-        const { id, status } = req.query;
+        const { id, brandID, status } = req.query;
 
-        const fetchedModelData = await FetchBrandModelService(id,status);
+        const fetchedModelData = await FetchBrandModelService(id, brandID, status);
 
         return res.status(fetchedModelData.status ? 200 : 404).json({
-            status : fetchedModelData.status,
-            count : fetchedModelData.count,
-            data : fetchedModelData.data,
-            message : fetchedModelData.message
+            status: fetchedModelData.status,
+            count: fetchedModelData.count,
+            data: fetchedModelData.data,
+            message: fetchedModelData.message
         })
     } catch (error) {
         // Handling unexpected errors and logging them

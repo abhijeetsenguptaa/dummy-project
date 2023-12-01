@@ -1,21 +1,25 @@
-const BrandModel = require("../../models/brand_model.model");
-const Brand = require("../../models/brand.model");  // Import the Brand model
+const Brand = require('../../models/brand.model');
+const BrandModel = require('../../models/brand_model.model');
 
-async function FetchBrandModelService(id, status) {
+async function FetchBrandModelService(id, brandID, status) {
     try {
         let fetchBrandModelData;
 
-        const queryOptions = {};
-        queryOptions.include = [Brand];  // Include the Brand model
+        const queryOptions = { include: [Brand] };
+        const whereClause = {};
+
         if (id) {
-            queryOptions.where = { id: id };
-            fetchBrandModelData = await BrandModel.findOne(queryOptions);
-        } else if (status !== undefined) {
-            queryOptions.where = { status: status };
-            fetchBrandModelData = await BrandModel.findAll(queryOptions);
-        } else {
-            fetchBrandModelData = await BrandModel.findAll(queryOptions);
+            whereClause.id = id;
         }
+        if (brandID) {
+            whereClause.brand_id = brandID;
+        }
+        if (status !== undefined) {
+            whereClause.status = status;
+        }
+
+        queryOptions.where = whereClause;
+        fetchBrandModelData = await BrandModel.findAll(queryOptions);
 
         return {
             status: true,

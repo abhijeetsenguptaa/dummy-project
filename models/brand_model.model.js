@@ -22,8 +22,9 @@ const Brand_Model = connection.define('brand_models', {
         },
     },
     status: {
-        type: DataTypes.ENUM('active', 'inactive'),
-        defaultValue: 'active',
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: true,
     },
     logo: {
         type: DataTypes.STRING,
