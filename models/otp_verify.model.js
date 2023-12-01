@@ -18,12 +18,12 @@ const Otp_Verify = connection.define('otps_verify', {
     created_at: {
         type: DataTypes.DATE,
         allowNull: true,
-        defaultValue: literal('CURRENT_TIMESTAMP'),
+        defaultValue: DataTypes.NOW,
     },
     updated_at: {
         type: DataTypes.DATE,
         allowNull: true,
-        defaultValue: literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+        defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: false

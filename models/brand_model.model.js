@@ -83,12 +83,12 @@ const Brand_Model = connection.define('brand_models', {
     created_at: {
         type: DataTypes.DATE,
         allowNull: true,
-        defaultValue: literal('CURRENT_TIMESTAMP'),
+        defaultValue: DataTypes.NOW,
     },
     updated_at: {
         type: DataTypes.DATE,
         allowNull: true,
-        defaultValue: literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+        defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: false,
