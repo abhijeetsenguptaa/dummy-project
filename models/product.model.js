@@ -1,11 +1,10 @@
-const { DataTypes, Model } = require('sequelize');
-const db = require('../configs/connection');
-const { Category } = require('./category.model');
+const { DataTypes } = require('sequelize');
 const Vendors = require('./vendors.model');
+const connection = require('../configs/connection');
+const Category = require('./category.model');
 
-class Product extends Model { }
 
-Product.init({
+const Product = connection.define('products', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -41,24 +40,6 @@ Product.init({
         defaultValue: 0,
         references: {
             model: Category,
-            key: 'id'
-        }
-    },
-    sub_category_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-        references: {
-            model: 'sub_categories',
-            key: 'id'
-        }
-    },
-    child_category_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-        references: {
-            model: 'child_categories',
             key: 'id'
         }
     },
@@ -181,8 +162,8 @@ Product.init({
         allowNull: true,
         defaultValue: 0
     },
-    is_condition : {
-        type : DataTypes.ENUM('new','old','certified'),
+    is_condition: {
+        type: DataTypes.ENUM('new', 'old', 'certified'),
         allowNull: true
     },
     brand_model_id: {
@@ -239,4 +220,4 @@ Vendors.hasMany(Product, {
     onDelete: 'CASCADE'
 })
 
-module.exports = { Product };
+module.exports = Product;

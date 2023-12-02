@@ -15,6 +15,7 @@ const cityRoute = require('./routes/city.routes');
 const BrandRoute = require('./routes/brand.routes');
 const BrandModelRoute = require('./routes/brand_model.routes');
 const categoryRoute = require('./routes/category.routes');
+const vendorRoute = require('./routes/vendor.route');
 
 // Set the port for the server to run on, defaulting to 7000 if not specified in the environment
 const PORT = process.env.PORT || 7000;
@@ -54,7 +55,8 @@ app.use('/states', stateRoute);
 app.use('/cities', cityRoute);
 app.use('/brands', BrandRoute);
 app.use('/models', BrandModelRoute);
-app.use('/categories', categoryRoute)
+app.use('/categories', categoryRoute);
+app.use('/vendors', vendorRoute);
 
 // Synchronize the database connection and start the server
 connection.sync().then(() => {
