@@ -1,28 +1,30 @@
 const { DataTypes } = require('sequelize');
-const Vendors = require('./vendors.model');
 const connection = require('../configs/connection');
 const Category = require('./category.model');
+const Vendors = require('./vendor.model');
+const Brand = require('./brand.model');
+const Brand_Model = require('./brand_model.model');
 
 
 const Product = connection.define('products', {
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     short_name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     slug: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     thumb_image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     vendor_id: {
@@ -36,7 +38,7 @@ const Product = connection.define('products', {
     },
     category_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0,
         references: {
             model: Category,
@@ -45,16 +47,16 @@ const Product = connection.define('products', {
     },
     brand_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0,
         references: {
-            model: 'brands',
+            model: Brand,
             key: 'id'
         }
     },
     qty: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     weight: {
@@ -69,12 +71,12 @@ const Product = connection.define('products', {
     },
     short_description: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     long_description: {
         type: DataTypes.TEXT('long'),
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     video_link: {
@@ -94,17 +96,17 @@ const Product = connection.define('products', {
     },
     seo_title: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     seo_description: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     price: {
         type: DataTypes.DOUBLE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: null
     },
     offer_price: {
@@ -119,42 +121,42 @@ const Product = connection.define('products', {
     },
     show_homepage: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false
     },
     is_undefine: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false
     },
     is_featured: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false
     },
     new_product: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false
     },
     is_top: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false
     },
     is_best: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false
     },
     status: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: true
     },
     is_specification: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     is_refurbished: {
@@ -167,9 +169,13 @@ const Product = connection.define('products', {
         allowNull: true
     },
     brand_model_id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: null
+        references: {
+            model: Brand_Model,
+            key: 'id'
+        }
+
     },
     battery_condition: {
         type: DataTypes.INTEGER,
@@ -183,17 +189,17 @@ const Product = connection.define('products', {
     },
     approve_by_admin: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     created_at: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.NOW,
     },
     updated_at: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.NOW,
     }
 }, {
@@ -210,6 +216,16 @@ Product.belongsTo(Vendors, {
     onDelete: 'CASCADE'
 })
 
+Product.belongsTo(Brand , {
+    foreignKey : 'brand_id',
+    onDelete : 'CASCADE'
+})
+
+Product.belongsTo(Brand_Model , {
+    foreignKey : 'brand_model_id',
+    onDelete : 'CASCADE'
+})
+
 Category.hasMany(Product, {
     foreignKey: 'category_id',
     onDelete: 'CASCADE'
@@ -217,6 +233,16 @@ Category.hasMany(Product, {
 
 Vendors.hasMany(Product, {
     foreignKey: 'vendor_id',
+    onDelete: 'CASCADE'
+})
+
+Brand.hasMany(Product, {
+    foreignKey: 'brand_id',
+    onDelete: 'CASCADE'
+})
+
+Brand_Model.hasMany(Product, {
+    foreignKey: 'brand_model_id',
     onDelete: 'CASCADE'
 })
 
