@@ -1,6 +1,6 @@
 const City = require("../../models/city.model");
 
-async function FetchCityService(id) {
+async function FetchCityService(id, stateID) {
     try {
         let cityData;
 
@@ -17,6 +17,8 @@ async function FetchCityService(id) {
                     data: null
                 };
             }
+        } else if (stateID) {
+            cityData = await City.findAll({ where: { country_state_id: stateID } })
         } else {
             cityData = await City.findAll();
         }

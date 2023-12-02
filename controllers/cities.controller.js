@@ -5,9 +5,9 @@ const UpdateCityService = require("../services/cities/UpdateCityService");
 
 async function fetchCityController(req, res) {
     try {
-        const { id } = req.query;
+        const { id, stateID } = req.query;
 
-        const cityData = await FetchCityService(id);
+        const cityData = await FetchCityService(id, stateID);
 
         return res.status(cityData.status ? 200 : 500).json({
             status: cityData.status,
