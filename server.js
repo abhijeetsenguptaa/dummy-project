@@ -15,7 +15,7 @@ const cityRoute = require('./routes/city.routes');
 const BrandRoute = require('./routes/brand.routes');
 const BrandModelRoute = require('./routes/brand_model.routes');
 const categoryRoute = require('./routes/category.routes');
-const vendorRoute = require('./routes/vendor.route');
+const vendorRoute = require('./routes/vendor.routes');
 const productRoute = require('./routes/product.routes');
 
 // Set the port for the server to run on, defaulting to 7000 if not specified in the environment
