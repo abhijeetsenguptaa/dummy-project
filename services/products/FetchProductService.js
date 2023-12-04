@@ -25,15 +25,15 @@ async function FetchProductService(id, brand, model, category, low, high, produc
         }
 
         if (low) {
-            whereConditions.price = {
-                [Op.gte]: low, // Filter products with price greater than or equal to priceLow
+            whereConditions.offer_price = {
+                [Op.gte]: low,
             };
         }
-
+        
         if (high) {
-            whereConditions.price = {
-                ...whereConditions.price,
-                [Op.lte]: high, // Filter products with price less than or equal to priceHigh
+            whereConditions.offer_price = {
+                ...whereConditions.offer_price,
+                [Op.lte]: high,
             };
         }
 
