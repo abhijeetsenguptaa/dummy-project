@@ -1,3 +1,4 @@
+const FetchOneProductService = require("../services/products/FetchOneProductService");
 const FetchProductService = require("../services/products/FetchProductService");
 const PostProductService = require("../services/products/PostProductService");
 
@@ -43,4 +44,25 @@ async function postProductController(req, res) {
         });
     }
 }
-module.exports = { fetchProductController, postProductController };
+
+async function fetchOneProductController(req, res) {
+    try {
+        const id = req.params.id;
+
+        const fetchedOneData = await FetchOneProductService(id);
+
+        return res.status(fetchedOneData.status ? 200 : 404).json({
+            status: fetchedOneData.status,
+            message: fetchedOneData.message,
+            data: fetchedOneData.status ? fetchedOneData.data : null
+        })
+    } catch (error) {
+        // Handling unexpected errors and logging them
+        console.error(error.message);
+        return res.status(500).json({
+            status: false,
+            message: error.message
+        });
+    }
+}
+module.exports = { fetchProductController, postProductController, fetchOneProductController };

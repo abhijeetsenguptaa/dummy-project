@@ -1,6 +1,6 @@
 const Address = require("../../models/address.model");
 
-async function UpdateAddressService(id, name, email, phone, country_id, state_id, city_id, address, type, default_shipping, default_billing) {
+async function UpdateAddressService(id, name, email, phone, country_id, state_id, city_id, address,pincode, type, default_shipping, default_billing) {
     try {
         const required_address = await Address.findByPk(id);
         if (!required_address) {
@@ -13,6 +13,7 @@ async function UpdateAddressService(id, name, email, phone, country_id, state_id
         required_address.name = name || required_address.name
         required_address.email = email || required_address.email
         required_address.address = address || required_address.address
+        required_address.pincode = pincode || required_address.pincode
         required_address.type = type || required_address.type
         required_address.phone = phone || required_address.phone
         required_address.country_id = country_id || required_address.country_id

@@ -29,9 +29,9 @@ async function fetchingAddressController(req, res) {
 async function addingAddressController(req, res) {
     try {
         const userID = req.userID;
-        const { name, email, phone, country_id, state_id, city_id, address, type, default_shipping, default_billing } = req.body;
+        const { name, email, phone, country_id, state_id, city_id, address, pincode, type, default_shipping, default_billing } = req.body;
 
-        const addressInsert = await AddAddressService(userID, name, email, phone, country_id, state_id, city_id, address, type, default_shipping, default_billing);
+        const addressInsert = await AddAddressService(userID, name, email, phone, country_id, state_id, city_id, address, pincode, type, default_shipping, default_billing);
 
         return res.status(addressInsert.status ? 200 : 500).json({
             status: addressInsert.status,
@@ -50,9 +50,9 @@ async function addingAddressController(req, res) {
 async function updateAddressController(req, res) {
     try {
         const id = req.params.id;
-        const { name, email, phone, country_id, state_id, city_id, address, type, default_shipping, default_billing } = req.body;
+        const { name, email, phone, country_id, state_id, city_id, address,pincode, type, default_shipping, default_billing } = req.body;
 
-        const addressUpgrade = await UpdateAddressService(id, name, email, phone, country_id, state_id, city_id, address, type, default_shipping, default_billing);
+        const addressUpgrade = await UpdateAddressService(id, name, email, phone, country_id, state_id, city_id, address,pincode, type, default_shipping, default_billing);
 
         return res.status(addressUpgrade.status ? 200 : 404).json({
             status: addressUpgrade.status,

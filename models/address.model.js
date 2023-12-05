@@ -61,6 +61,11 @@ const Address = connection.define('addresses', {
         allowNull: true,
         defaultValue: null
     },
+    pincode : {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
     type: {
         type: DataTypes.STRING,
         allowNull: true,
