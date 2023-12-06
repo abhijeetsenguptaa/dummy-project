@@ -243,7 +243,7 @@ const Product = connection.define('products', {
         defaultValue: null
     },
     images: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.JSON,
         allowNull: true,
         defaultValue: null
     },    
