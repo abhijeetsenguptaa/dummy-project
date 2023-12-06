@@ -245,7 +245,7 @@ const Product = connection.define('products', {
     images: {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
-        defaultValue: []
+        defaultValue: null
     },    
     approve_by_admin: {
         type: DataTypes.INTEGER,
