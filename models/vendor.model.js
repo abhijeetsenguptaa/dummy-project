@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const connection = require("../configs/connection");
 const User = require("./user.model");
 
-const Vendors = connection.define('vendorsPhone', {
+const Vendors = connection.define('vendors', {
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
