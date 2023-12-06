@@ -187,6 +187,66 @@ const Product = connection.define('products', {
         allowNull: true,
         defaultValue: 0
     },
+    os: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    processor: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    ram: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    },
+    storage_capacity: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    },
+    display_size: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    resolution: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    front_camera: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    rear_camera: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    connectivity: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    sim_type: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    network_technology: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
+    images: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+        defaultValue: []
+    },    
     approve_by_admin: {
         type: DataTypes.INTEGER,
         allowNull: true,

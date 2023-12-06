@@ -1,6 +1,20 @@
+const Product = require("../models/product.model");
 const FetchOneProductService = require("../services/products/FetchOneProductService");
 const FetchProductService = require("../services/products/FetchProductService");
-const PostProductService = require("../services/products/PostProductService");
+// const PostProductService = require("../services/products/PostProductService");
+const multer = require('multer');
+
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, 'uploads/product-images');
+        },
+        filename: function (req, file, cb) {
+            cb(null, Date.now() + '-' + file.originalname);
+        },
+    }),
+});
+
 
 async function fetchProductController(req, res) {
     try {
@@ -24,16 +38,118 @@ async function fetchProductController(req, res) {
     }
 }
 
+
+
 async function postProductController(req, res) {
     try {
-        const { name, short_name, slug, thumb_image, vendor_id, category_id, brand_id, qty, weight, sold_qty, short_description, long_description, video_link, sku, imei, seo_title, seo_description, price, offer_price, tags, show_homepage, is_undefine, is_featured, new_product, is_top, is_best, status, is_specification, is_refurbished, is_condition, brand_model_id, battery_condition, product_condition, approve_by_admin } = req.body;
 
-        const postingProduct = await PostProductService(name, short_name, slug, thumb_image, vendor_id, category_id, brand_id, qty, weight, sold_qty, short_description, long_description, video_link, sku, imei, seo_title, seo_description, price, offer_price, tags, show_homepage, is_undefine, is_featured, new_product, is_top, is_best, status, is_specification, is_refurbished, is_condition, brand_model_id, battery_condition, product_condition, approve_by_admin)
+        // Access uploaded images in req.files
+        const images = req.files.map((file) => ({
+            filename: file.originalname
+        }));
 
-        return res.status(postingProduct.status ? 200 : 404).json({
-            status: postingProduct.status,
-            message: postingProduct.message,
-            data: postingProduct.status ? postingProduct.data : null
+        const { name,
+            short_name,
+            slug,
+            thumb_image,
+            vendor_id,
+            category_id,
+            brand_id,
+            qty,
+            weight,
+            sold_qty,
+            short_description,
+            long_description,
+            video_link,
+            sku, imei,
+            seo_title,
+            seo_description,
+            price,
+            offer_price,
+            tags,
+            show_homepage,
+            is_undefine,
+            is_featured,
+            new_product,
+            is_top,
+            is_best,
+            status,
+            is_specification,
+            is_refurbished,
+            is_condition,
+            brand_model_id,
+            battery_condition,
+            product_condition,
+            os,
+            processor,
+            ram,
+            storage_capacity,
+            display_size,
+            resolution,
+            front_camera,
+            rear_camera,
+            connectivity,
+            sim_type,
+            network_technology,
+            approve_by_admin } = req.body;
+
+        const postingProduct = await Product({
+            name,
+            short_name,
+            slug,
+            thumb_image,
+            vendor_id,
+            category_id,
+            brand_id,
+            qty,
+            weight,
+            sold_qty,
+            short_description,
+            long_description,
+            video_link,
+            sku, imei,
+            seo_title,
+            seo_description,
+            price,
+            offer_price,
+            tags,
+            show_homepage,
+            is_undefine,
+            is_featured,
+            new_product,
+            is_top,
+            is_best,
+            status,
+            is_specification,
+            is_refurbished,
+            is_condition,
+            brand_model_id,
+            battery_condition,
+            product_condition,
+            os,
+            processor,
+            ram,
+            storage_capacity,
+            display_size,
+            resolution,
+            front_camera,
+            rear_camera,
+            connectivity,
+            sim_type,
+            network_technology,
+            images,
+            approve_by_admin
+        })
+
+        // return res.status(postingProduct.status ? 200 : 404).json({
+        //     status: postingProduct.status,
+        //     message: postingProduct.message,
+        //     data: postingProduct.status ? postingProduct.data : null
+        // })
+        return res.status(200).json({
+            status: true,
+            message: "Successfully Uploaded",
+            data: postingProduct
         })
     } catch (error) {
         // Handling unexpected errors and logging them
@@ -44,6 +160,7 @@ async function postProductController(req, res) {
         });
     }
 }
+
 
 async function fetchOneProductController(req, res) {
     try {
@@ -54,7 +171,9 @@ async function fetchOneProductController(req, res) {
         return res.status(fetchedOneData.status ? 200 : 404).json({
             status: fetchedOneData.status,
             message: fetchedOneData.message,
-            data: fetchedOneData.status ? fetchedOneData.data : null
+            data: fetchedOneData.status ? fetchedOneData.data : null,
+            productFromOtherSeller: fetchedOneData.status ? fetchedOneData.dataFromOtherSeller : null,
+            similarPhones: fetchedOneData.status ? fetchedOneData.similarPhones : null
         })
     } catch (error) {
         // Handling unexpected errors and logging them
@@ -65,4 +184,4 @@ async function fetchOneProductController(req, res) {
         });
     }
 }
-module.exports = { fetchProductController, postProductController, fetchOneProductController };
+module.exports = { fetchProductController, postProductController, fetchOneProductController, upload };

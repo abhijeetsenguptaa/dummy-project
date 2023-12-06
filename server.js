@@ -4,6 +4,8 @@ require('dotenv').config();
 // Import necessary modules
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const path = require('path');
 
 // Import database connection configuration
 const connection = require('./configs/connection');

@@ -3,6 +3,7 @@ const Product = require("../../models/product.model");
 const Category = require("../../models/category.model");
 const Brand_Model = require("../../models/brand_model.model");
 const Brand = require("../../models/brand.model");
+const Vendors = require("../../models/vendor.model");
 
 async function FetchProductService(id, brand, model, category, low, high, product_condition, page, limit, highlight, sort) {
     try {
@@ -60,7 +61,7 @@ async function FetchProductService(id, brand, model, category, low, high, produc
             where: whereConditions,
             limit: parseInt(limit),
             offset: (page - 1) * limit,
-            include: [Category,Brand_Model,Brand],
+            include: [Category,Brand_Model,Brand,Vendors],
             order: order, // Add the order option for sorting
         });
 
