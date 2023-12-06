@@ -2,14 +2,11 @@ const { DataTypes } = require("sequelize");
 const connection = require("../configs/connection");
 const User = require("./user.model");
 
-const Vendors = connection.define('vendors', {
+const Vendors = connection.define('vendorsPhone', {
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        references: {
-            model: User,
-            key: 'id'
-        }
+        defaultValue : null
     },
     total_amount: {
         type: DataTypes.DOUBLE,
