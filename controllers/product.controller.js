@@ -42,11 +42,14 @@ async function fetchProductController(req, res) {
 
 async function postProductController(req, res) {
     try {
+        let images;
 
-        // Access uploaded images in req.files
-        const images = req.files.map((file) => ({
-            filename: file.originalname
-        }));
+        if (req.file) {
+            // Access uploaded images in req.files
+            images = req.files.map((file) => ({
+                filename: file.originalname
+            }));
+        }
 
         const { name,
             short_name,
@@ -93,7 +96,7 @@ async function postProductController(req, res) {
             network_technology,
             approve_by_admin } = req.body;
 
-        const postingProduct = await Product({
+        const postingProduct = await Product.create({
             name,
             short_name,
             slug,
