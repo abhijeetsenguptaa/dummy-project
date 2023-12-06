@@ -160,13 +160,11 @@ const Vendors = connection.define('vendors', {
 })
 
 Vendors.belongsTo(User, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
+    foreignKey: 'user_id'
 })
 
 User.hasMany(Vendors, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
+    foreignKey: 'user_id'
 })
 
 module.exports = Vendors;
