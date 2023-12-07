@@ -3,7 +3,7 @@ const connection = require("../configs/connection");
 const User = require("./user.model");
 const Product = require("./product.model");
 
-const Wishlist = connection.define('wishlists', {
+const Recent_Searches = connection.define('recent_searches', {
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
@@ -35,25 +35,25 @@ const Wishlist = connection.define('wishlists', {
         timestamps: false
     })
 
-
-Wishlist.belongsTo(User, {
+Recent_Searches.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 })
 
-User.hasMany(Wishlist, {
+User.hasMany(Recent_Searches, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 })
 
-Wishlist.belongsTo(Product, {
+Recent_Searches.belongsTo(Product, {
     foreignKey: 'product_id',
     onDelete: 'CASCADE'
 })
 
-Product.hasMany(Wishlist, {
+Product.hasMany(Recent_Searches, {
     foreignKey: 'product_id',
     onDelete: 'CASCADE'
 })
 
-module.exports = Wishlist
+
+module.exports = Recent_Searches;

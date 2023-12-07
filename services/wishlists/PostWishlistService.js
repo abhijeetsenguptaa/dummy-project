@@ -1,12 +1,13 @@
-const Wishlist = require("../../models/wishlist.model");
+const Recent_Searches = require("../../models/recentSearch.model");
 
-async function PostWishlistService(userID, productID) {
+
+async function PostRecentSearchesService(userID, productID) {
     try {
-        const postWishlist = await Wishlist.create({ user_id: userID, product_id: productID });
+        const postRecentSearches = await Recent_Searches.create({ user_id: userID, product_id: productID });
         return {
             status: true,
-            message : 'Items has been added to Wishlist.',
-            data : postWishlist
+            message : 'Items has been added to RecentSearches.',
+            data : postRecentSearches
         }
     } catch (error) {
         console.log(error);
@@ -17,4 +18,4 @@ async function PostWishlistService(userID, productID) {
     }
 }
 
-module.exports = PostWishlistService;
+module.exports = PostRecentSearchesService;
