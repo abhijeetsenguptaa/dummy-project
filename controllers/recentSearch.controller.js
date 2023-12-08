@@ -1,3 +1,4 @@
+const DeleteRecentSearchesService = require("../services/recent_searches/DeleteRecentSearchesService");
 const FetchRecentSearchesService = require("../services/recent_searches/FetchRecentSearchesService");
 const PostRecent_SearchesService = require("../services/recent_searches/PostRecentSearchesService");
 
@@ -47,4 +48,25 @@ async function fetchRecentSearchesController(req, res) {
 }
 
 
-module.exports = { postRecentSearchesController, fetchRecentSearchesController };
+async function deleteRecentSearchController(req, res) {
+    try {
+        const id = req.params.id;
+        const userID = req.userID;
+
+        const deleteData = await DeleteRecentSearchesService(userID, id);
+
+        return res.status(deleteData.status ? 200 : 404).json({
+            status: deleteData.status,
+            message: deleteData.message
+        })
+    } catch (error) {
+        // Handling unexpected errors and logging them
+        console.error(error.message);
+        return res.status(500).json({
+            status: false,
+            message: error.message
+        });
+    }
+}
+
+module.exports = { postRecentSearchesController, fetchRecentSearchesController, deleteRecentSearchController };
