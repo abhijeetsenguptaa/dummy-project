@@ -1,12 +1,12 @@
 const FetchRecentSearchesService = require("../services/recent_searches/FetchRecentSearchesService");
-const PostRecentSearchesService = require("../services/wishlists/PostWishlistService");
+const PostRecent_SearchesService = require("../services/recent_searches/PostRecentSearchesService");
 
 async function postRecentSearchesController(req, res) {
     try {
         const userID = req.userID;
         const productID = req.params.id;
 
-        const postRecentSearches = await PostRecentSearchesService(userID, productID);
+        const postRecentSearches = await PostRecent_SearchesService(userID, productID);
 
         return res.status(postRecentSearches.status ? 200 : 404).json({
             status: postRecentSearches.status,
@@ -28,10 +28,11 @@ async function fetchRecentSearchesController(req, res) {
         const userID = req.userID;
 
         const fetchRecentSearchesData = await FetchRecentSearchesService(userID);
-        
+
         return res.status(fetchRecentSearchesData.status ? 200 : 404).json({
             status: fetchRecentSearchesData.status,
             message: fetchRecentSearchesData.message,
+            count: fetchRecentSearchesData.count,
             data: fetchRecentSearchesData.status ? fetchRecentSearchesData.data : null
         })
 

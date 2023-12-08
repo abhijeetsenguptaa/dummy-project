@@ -14,7 +14,8 @@ async function FetchRecentSearchesService(userID) {
         return {
             status: true,
             message: `Recent Searches data for ${userID}.`,
-            data: fetchRecentSearchesData
+            data: fetchRecentSearchesData,
+            count : fetchRecentSearchesData.length
         }
     } catch (error) {
         console.log(error);
