@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Brand Model</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%; /* Adjusted width */
+        max-width: 400px; /* Added max-width */
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: auto; /* Center the form horizontally */
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input,
+      select,
+      button {
+        width: calc(100% - 20px); /* Adjusted width with box-sizing */
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      select {
+        appearance: none;
+      }
+
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #logo-preview {
+        max-width: 100%;
+        height: auto;
+        margin-top: 8px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="brandModelForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="slug">Slug:</label>
+      <input type="text" id="slug" name="slug" required />
+
+      <label for="brand_id">Brand ID:</label>
+      <input type="text" id="brand_id" name="brand_id" required />
+
+      <label for="status">Status:</label>
+      <select id="status" name="status" required>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+
+      <label for="year">Year:</label>
+      <input type="number" id="year" name="year" required />
+
+      <label for="operatingSystem">Operating System:</label>
+      <input type="text" id="operatingSystem" name="operatingSystem" required />
+
+      <label for="displaySize">Display Size:</label>
+      <input type="text" id="displaySize" name="displaySize" required />
+
+      <label for="storageCapacity">Storage Capacity:</label>
+      <input type="text" id="storageCapacity" name="storageCapacity" required />
+
+      <label for="ramSize">RAM Size:</label>
+      <input type="text" id="ramSize" name="ramSize" required />
+
+      <label for="cameraResolution">Camera Resolution:</label>
+      <input
+        type="text"
+        id="cameraResolution"
+        name="cameraResolution"
+        required
+      />
+
+      <label for="batteryCapacity">Battery Capacity:</label>
+      <input type="text" id="batteryCapacity" name="batteryCapacity" required />
+
+      <label for="simSlots">SIM Slots:</label>
+      <input type="number" id="simSlots" name="simSlots" required />
+
+      <label for="is5G">Is 5G:</label>
+      <select id="is5G" name="is5G" required>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+
+      <label for="launchDate">Launch Date:</label>
+      <input type="date" id="launchDate" name="launchDate" required />
+
+      <label for="logo">Logo:</label>
+      <input type="file" id="logo" name="logo" onchange="previewLogo()" />
+      <img id="logo-preview" alt="Logo Preview" />
+
+      <button type="button" onclick="addBrandModel()">Add Brand Model</button>
+    </form>
+
+    <script>
+      async function addBrandModel() {
+        const formData = new FormData(
+          document.getElementById("brandModelForm")
+        );
+        const response = await fetch("http://localhost:7000/models", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.status) {
+          alert(result.message);
+          // You can redirect or perform other actions upon success
+        } else {
+          alert("Error: " + result.message);
+        }
+      }
+
+      function previewLogo() {
+        const logoInput = document.getElementById("logo");
+        const logoPreview = document.getElementById("logo-preview");
+
+        if (logoInput.files && logoInput.files[0]) {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            logoPreview.src = e.target.result;
+          };
+
+          reader.readAsDataURL(logoInput.files[0]);
+        }
+      }
+    </script>
+  </body>
+</html>
