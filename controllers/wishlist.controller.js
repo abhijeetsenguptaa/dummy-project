@@ -1,6 +1,6 @@
+const DeleteWishlistService = require("../services/wishlists/DeleteWishlistService");
 const FetchWishlistService = require("../services/wishlists/FetchWishlistService");
 const PostWishlistService = require("../services/wishlists/PostWishlistService");
-
 async function postWishlistController(req, res) {
     try {
         const userID = req.userID;
@@ -28,7 +28,7 @@ async function fetchWishlistController(req, res) {
         const userID = req.userID;
 
         const fetchWishlistData = await FetchWishlistService(userID);
-        
+
         return res.status(fetchWishlistData.status ? 200 : 404).json({
             status: fetchWishlistData.status,
             message: fetchWishlistData.message,
@@ -46,4 +46,25 @@ async function fetchWishlistController(req, res) {
 }
 
 
-module.exports = { postWishlistController, fetchWishlistController };
+async function DeleteWishlistController(req, res) {
+    try {
+        const id = req.params.id;
+        const userID = req.userID;
+
+        const requiredData = await DeleteWishlistService(id, userID);
+
+        return res.status(requiredData.status ? 200 : 404).json({
+            status: requiredData.status,
+            message: requiredData.message
+        })
+    } catch (error) {
+        // Handling unexpected errors and logging them
+        console.error(error.message);
+        return res.status(500).json({
+            status: false,
+            message: error.message
+        });
+    }
+}
+
+module.exports = { postWishlistController, fetchWishlistController, DeleteWishlistController };

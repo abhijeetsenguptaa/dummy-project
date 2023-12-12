@@ -1,9 +1,8 @@
-const Recent_Searches = require("../../models/recentSearch.model");
+const Wishlist = require("../../models/wishlist.model");
 
-
-async function PostRecentSearchesService(userID, productID) {
+async function PostWishlistsService(userID, productID) {
     try {
-        const postRecentSearches = await Recent_Searches.create({ user_id: userID, product_id: productID });
+        const postRecentSearches = await Wishlist.create({ user_id: userID, product_id: productID });
         return {
             status: true,
             message : 'Items has been added to RecentSearches.',
@@ -18,4 +17,4 @@ async function PostRecentSearchesService(userID, productID) {
     }
 }
 
-module.exports = PostRecentSearchesService;
+module.exports = PostWishlistsService;

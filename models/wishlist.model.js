@@ -56,4 +56,4 @@ Product.hasMany(Wishlist, {
     onDelete: 'CASCADE'
 })
 
-module.exports = Wishlist
+module.exports = Wishlist;
