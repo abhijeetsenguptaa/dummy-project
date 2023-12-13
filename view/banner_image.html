@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banner Posting</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-bottom: 8px;
+      }
+
+      input,
+      select,
+      button {
+        margin-bottom: 16px;
+        padding: 8px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .error {
+        color: #ff0000;
+      }
+
+      .success {
+        color: #008000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Banner Posting</h1>
+      <form id="productForm"
+      enctype="multipart/form-data"
+      onsubmit="submitForm(event)">
+        <label for="header">Header:</label>
+        <input type="text" id="header" name="header" required />
+
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
+
+        <label for="link">Link:</label>
+        <input type="text" id="link" name="link" required />
+
+        <label for="banner_location">Banner Location:</label>
+        <input
+          type="text"
+          id="banner_location"
+          name="banner_location"
+          required
+        />
+
+        <label for="after_product_qty">After Product Quantity:</label>
+        <input
+          type="number"
+          id="after_product_qty"
+          name="after_product_qty"
+          required
+        />
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+
+        <label for="title_one">Title One:</label>
+        <input type="text" id="title_one" name="title_one" required />
+
+        <label for="title_two">Title Two:</label>
+        <input type="text" id="title_two" name="title_two" required />
+
+        <label for="badge">Badge:</label>
+        <input type="text" id="badge" name="badge" required />
+
+        <label for="product_slug">Product Slug:</label>
+        <input type="text" id="product_slug" name="product_slug" required />
+
+        <label for="bannerImage">Banner Image:</label>
+        <input
+          type="file"
+          id="bannerImage"
+          name="bannerImage"
+          accept="image/*"
+          required
+        />
+
+        <button type="submit" id="buttonClick">Post Banner</button>
+      </form>
+      <div id="result"></div>
+    </div
+  </body>
+  <script>
+    async function submitForm(event) {
+        event.preventDefault();
+        try {
+          // Create a FormData object to store form data
+          const formData = new FormData(document.getElementById("productForm"));
+          console.log(formData);
+
+          // Make a POST request to the specified endpoint
+          const response = await fetch("http://localhost:7000/products", {
+            method: "POST",
+            body: formData,
+          });
+
+          // Check if the request was successful
+          if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+          } else {
+            // Handle error response
+            console.error("Failed to submit form. Status:", response.status);
+          }
+        } catch (error) {
+          // Handle unexpected errors
+          console.error("Error:", error.message);
+        }
+      }
+  </script>
+</html>

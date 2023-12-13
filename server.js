@@ -21,6 +21,7 @@ const vendorRoute = require('./routes/vendor.routes');
 const productRoute = require('./routes/product.routes');
 const wishlistRoute = require('./routes/wishlist.routes');
 const RecentSearchesRoute = require('./routes/recentSearch.routes');
+const bannerImageRoute = require('./routes/banner_image.routes');
 
 // Set the port for the server to run on, defaulting to 7000 if not specified in the environment
 const PORT = process.env.PORT || 7000;
@@ -65,6 +66,7 @@ app.use('/vendors', vendorRoute);
 app.use('/products', productRoute);
 app.use('/wishlists', wishlistRoute);
 app.use('/recent_searches', RecentSearchesRoute);
+app.use('/banners', bannerImageRoute);
 
 // Synchronize the database connection and start the server
 connection.sync().then(() => {

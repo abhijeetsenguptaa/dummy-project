@@ -2,9 +2,9 @@ const Wishlist = require("../../models/wishlist.model");
 
 async function DeleteWishlistService(id, userID) {
     try {
-        const dataToBeDeleted = await Wishlist.findOne({
+        const dataToBeDeleted = await Wishlist.findAll({
             where: {
-                id: id,
+                product_id: id,
                 user_id: userID
             }
         });

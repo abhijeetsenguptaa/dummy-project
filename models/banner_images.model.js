@@ -1,7 +1,7 @@
-const { DataTypes, literal } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const connection = require("../configs/connection");
 
-const Banner_Image = connection.define({
+const Banner_Image = connection.define('banner_images',{
     header: {
         type: DataTypes.STRING,
         allowNull: true

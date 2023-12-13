@@ -5,6 +5,6 @@ const productRoute = express.Router();
 
 productRoute.get('/', fetchProductController);
 productRoute.get('/:id', fetchOneProductController);
-productRoute.post('/', upload.array('images', 10), postProductController);
+productRoute.post('/', upload.array('images', 5), postProductController);
 
 module.exports = productRoute;

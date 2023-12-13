@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Upload</title>
+  </head>
+  <body>
+    <form
+      id="productForm"
+      enctype="multipart/form-data"
+      onsubmit="submitForm(event)"
+    >
+      General Product Information
+      <label for="name">Name:</label>
+      <input type="text" name="name" />
+
+      <!-- ~ut type="file" id="thumb_image" name="thumb_image" accept="image/*" /> -->
+
+      <label for="vendor_id">Vendor ID:</label>
+      <input type="number" id="vendor_id" name="vendor_id" value="1" required />
+
+      <label for="category_id">Category ID:</label>
+      <input
+        type="number"
+        id="category_id"
+        name="category_id"
+        value="1"
+        required
+      />
+
+      <label for="brand_id">Brand ID:</label>
+      <input type="number" id="brand_id" name="brand_id" value="1" required />
+
+      <label for="brand_model_id">Brand Model ID:</label>
+      <input
+        type="number"
+        id="brand_model_id"
+        name="brand_model_id"
+        value="1"
+        required
+      />
+
+      <!-- Images -->
+      <label for="images">Images (Up to 3):</label>
+      <input
+        type="file"
+        name="images"
+        id="imageHolder"
+        accept="image/*"
+        multiple
+      />
+
+      <!-- Submit Button -->
+      <button type="submit" id="buttonClick">Submit</button>
+    </form>
+
+    <script>
+      async function submitForm(event) {
+        event.preventDefault();
+        try {
+          // Create a FormData object to store form data
+          const formData = new FormData(document.getElementById("productForm"));
+          console.log(formData);
+
+          // Make a POST request to the specified endpoint
+          const response = await fetch("http://penguinfe.golu.in:7000/products", {
+            method: "POST",
+            body: formData,
+          });
+
+          // Check if the request was successful
+          if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+          } else {
+            // Handle error response
+            console.error("Failed to submit form. Status:", response.status);
+          }
+        } catch (error) {
+          // Handle unexpected errors
+          console.error("Error:", error.message);
+        }
+      }
+    </script>
+  </body>
+</html>
