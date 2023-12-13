@@ -77,7 +77,7 @@
         <input
           type="text"
           id="banner_location"
-          name="banner_location"
+          name="image"
           required
         />
 
@@ -111,9 +111,8 @@
         <input
           type="file"
           id="bannerImage"
-          name="bannerImage"
+          name="image"
           accept="image/*"
-          required
         />
 
         <button type="submit" id="buttonClick">Post Banner</button>
@@ -128,9 +127,17 @@
           // Create a FormData object to store form data
           const formData = new FormData(document.getElementById("productForm"));
           console.log(formData);
+          // Convert FormData to plain object for better readability
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
 
-          // Make a POST request to the specified endpoint
-          const response = await fetch("http://localhost:7000/products", {
+      // Log the FormData object in a more readable format
+      console.log(formDataObject);
+
+        //   Make a POST request to the specified endpoint
+          const response = await fetch("http://localhost:7000/banners", {
             method: "POST",
             body: formData,
           });

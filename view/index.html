@@ -3,64 +3,224 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-top: 10px;
+      }
+
+      input,
+      textarea,
+      select {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+    </style>
     <title>Product Upload</title>
   </head>
   <body>
-    <form
-      id="productForm"
-      enctype="multipart/form-data"
-      onsubmit="submitForm(event)"
-    >
-      General Product Information
-      <label for="name">Name:</label>
-      <input type="text" name="name" />
+    <div class="container">
+      <h1>Product Upload</h1>
+      <form
+        id="productForm"
+        enctype="multipart/form-data"
+        onsubmit="submitForm(event)"
+      >
+        <!-- General Product Information -->
+        <label for="name">Name:</label>
+        <input type="text" name="name" />
 
-      <!-- ~ut type="file" id="thumb_image" name="thumb_image" accept="image/*" /> -->
+        <label for="short_name">Short Name:</label>
+        <input type="text" name="short_name" />
 
-      <label for="vendor_id">Vendor ID:</label>
-      <input type="number" id="vendor_id" name="vendor_id" value="1" required />
+        <label for="slug">Slug:</label>
+        <input type="text" name="slug" />
 
-      <label for="category_id">Category ID:</label>
-      <input
-        type="number"
-        id="category_id"
-        name="category_id"
-        value="1"
-        required
-      />
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="qty" />
 
-      <label for="brand_id">Brand ID:</label>
-      <input type="number" id="brand_id" name="brand_id" value="1" required />
+        <label for="weight">Weight:</label>
+        <input type="number" name="weight" />
 
-      <label for="brand_model_id">Brand Model ID:</label>
-      <input
-        type="number"
-        id="brand_model_id"
-        name="brand_model_id"
-        value="1"
-        required
-      />
+        <label for="sold_qty">Sold_qty:</label>
+        <input type="number" name="sold_qty" />
 
-      <!-- Images -->
-      <label for="images">Images (Up to 3):</label>
-      <input
-        type="file"
-        name="images"
-        id="imageHolder"
-        accept="image/*"
-        multiple
-      />
+        <label for="short_description">Short Description:</label>
+        <input type="text" name="short_description" />
 
-      <!-- Submit Button -->
-      <button type="submit" id="buttonClick">Submit</button>
-    </form>
+        <label for="long_description">Long Description:</label>
+        <input type="text" name="long_description" />
 
+        <label for="vendor_id">Vendor ID:</label>
+        <input type="number" id="vendor_id" name="vendor_id" value="1" required />
+
+        <label for="category_id">Category ID:</label>
+        <input
+          type="number"
+          id="category_id"
+          name="category_id"
+          value="1"
+          required
+        />
+
+        <label for="brand_id">Brand ID:</label>
+        <input type="number" id="brand_id" name="brand_id" value="1" required />
+
+        <label for="brand_model_id">Brand Model ID:</label>
+        <input
+          type="number"
+          id="brand_model_id"
+          name="brand_model_id"
+          value="1"
+          required
+        />
+
+        <!-- Images -->
+        <label for="images">Images (Up to 3):</label>
+        <input
+          type="file"
+          name="images"
+          id="imageHolder"
+          accept="image/*"
+          multiple
+        />
+
+        <!-- Additional Product Information -->
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" />
+
+        <label for="offer_price">Offer Price:</label>
+        <input type="number" id="offer_price" name="offer_price" />
+
+        <label for="tags">Tags:</label>
+        <input type="text" id="tags" name="tags" />
+
+        <label for="show_homepage">Show on Homepage:</label>
+        <input type="checkbox" id="show_homepage" name="show_homepage" />
+
+        <label for="is_undefine">Is Undefine:</label>
+        <input type="checkbox" id="is_undefine" name="is_undefine" />
+
+        <label for="is_featured">Is Featured:</label>
+        <input type="checkbox" id="is_featured" name="is_featured" />
+
+        <label for="new_product">New Product:</label>
+        <input type="checkbox" id="new_product" name="new_product" />
+
+        <label for="is_top">Is Top:</label>
+        <input type="checkbox" id="is_top" name="is_top" />
+
+        <label for="is_best">Is Best:</label>
+        <input type="checkbox" id="is_best" name="is_best" />
+
+        <label for="status">Status:</label>
+        <input type="checkbox" id="status" name="status" />
+
+        <label for="is_specification">Is Specification:</label>
+        <input type="number" id="is_specification" name="is_specification" />
+
+        <label for="is_refurbished">Is Refurbished:</label>
+        <input type="number" id="is_refurbished" name="is_refurbished" />
+
+        <label for="is_condition">Condition:</label>
+        <select id="is_condition" name="is_condition">
+          <option value="new">New</option>
+          <option value="old">Old</option>
+          <option value="certified">Certified</option>
+        </select>
+
+        <label for="battery_condition">Battery Condition:</label>
+        <input type="number" id="battery_condition" name="battery_condition" />
+
+        <label for="product_condition">Product Condition:</label>
+        <input type="number" id="product_condition" name="product_condition" />
+
+        <label for="os">Operating System:</label>
+        <input type="text" id="os" name="os" />
+
+        <label for="processor">Processor:</label>
+        <input type="text" id="processor" name="processor" />
+
+        <label for="ram">RAM:</label>
+        <input type="number" id="ram" name="ram" />
+
+        <label for="storage_capacity">Storage Capacity:</label>
+        <input type="number" id="storage_capacity" name="storage_capacity" />
+
+        <label for="display_size">Display Size:</label>
+        <input type="text" id="display_size" name="display_size" />
+
+        <label for="resolution">Resolution:</label>
+        <input type="text" id="resolution" name="resolution" />
+
+        <label for="front_camera">Front Camera:</label>
+        <input type="text" id="front_camera" name="front_camera" />
+
+        <label for="rear_camera">Rear Camera:</label>
+        <input type="text" id="rear_camera" name="rear_camera" />
+
+        <label for="connectivity">Connectivity:</label>
+        <input type="text" id="connectivity" name="connectivity" />
+
+        <label for="sim_type">SIM Type:</label>
+        <input type="text" id="sim_type" name="sim_type" />
+
+        <label for="network_technology">Network Technology:</label>
+        <input type="text" id="network_technology" name="network_technology" />
+
+        <!-- Submit Button -->
+        <button type="submit" id="buttonClick">Submit</button>
+      </form>
+    </div>
     <script>
       async function submitForm(event) {
         event.preventDefault();
         try {
           // Create a FormData object to store form data
           const formData = new FormData(document.getElementById("productForm"));
+          // Convert checkbox values to true/false
+          formData.forEach((value, key) => {
+            if (value === "on") {
+              formData.set(key, true);
+            } else if (value === "undefined") {
+              formData.set(key, false);
+            }
+          });
           console.log(formData);
 
           // Make a POST request to the specified endpoint
