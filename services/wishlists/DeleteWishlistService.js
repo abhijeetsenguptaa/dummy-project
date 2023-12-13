@@ -9,19 +9,19 @@ async function DeleteWishlistService(id, userID) {
             }
         });
 
-        if (!dataToBeDeleted) {
+        if (!dataToBeDeleted || dataToBeDeleted.length === 0) {
             return {
                 status: false,
                 message: 'Wishlist item not found.',
             };
         }
 
-        // Assuming you want to delete the found item
-        await dataToBeDeleted.destroy();
+        // Assuming you want to delete all found items
+        await Promise.all(dataToBeDeleted.map(item => item.destroy()));
 
         return {
             status: true,
-            message: 'Wishlist item deleted successfully.',
+            message: 'Wishlist items deleted successfully.',
         };
     } catch (error) {
         console.error(error);
