@@ -77,4 +77,4 @@ Product.hasMany(Shopping_Carts, {
 
 
 
-module.exports = { Shopping_Carts };
+module.exports =  Shopping_Carts ;
