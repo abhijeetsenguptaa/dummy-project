@@ -246,7 +246,17 @@ const Product = connection.define('products', {
         type: DataTypes.JSON,
         allowNull: true,
         defaultValue: null
-    },    
+    },
+    pros: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: null
+    },
+    cons: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: null
+    },
     approve_by_admin: {
         type: DataTypes.INTEGER,
         allowNull: true,
@@ -276,14 +286,14 @@ Product.belongsTo(Vendors, {
     onDelete: 'CASCADE'
 })
 
-Product.belongsTo(Brand , {
-    foreignKey : 'brand_id',
-    onDelete : 'CASCADE'
+Product.belongsTo(Brand, {
+    foreignKey: 'brand_id',
+    onDelete: 'CASCADE'
 })
 
-Product.belongsTo(Brand_Model , {
-    foreignKey : 'brand_model_id',
-    onDelete : 'CASCADE'
+Product.belongsTo(Brand_Model, {
+    foreignKey: 'brand_model_id',
+    onDelete: 'CASCADE'
 })
 
 Category.hasMany(Product, {

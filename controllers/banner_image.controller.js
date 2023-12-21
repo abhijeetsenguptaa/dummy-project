@@ -18,7 +18,7 @@ async function postingBannerController(req, res) {
     try {
         let image = '';
         if (req.file){
-            image = 'uploads/banner-images/' + req.file.filename;;
+            image = 'uploads/banner-images/' + req.file.filename;
         }
 
         const { header, title, link, banner_location, after_product_qty, status, title_one, title_two, badge, product_slug } = req.body;
