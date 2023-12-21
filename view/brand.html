@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Category</title>
+</head>
+<body>
+    <div>
+        <form id="categoryForm">
+            <p>
+                <label for="name">Name</label>
+            </p>
+            <input type="text" name="name" id="name" required>
+
+            <p>
+                <label for="slug">Slug</label>
+            </p>
+            <input type="text" name="slug" id="slug" required>
+
+            <p>
+                <label for="logo">Icon</label>
+            </p>
+            <input type="file" name="logo" id="image" required>
+
+            <p>Status</p>
+            <select name="status" id="status" required>
+                <option value="" disabled selected>Select Status</option>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+
+            <p>
+                <button type="button" onclick="submitForm()">Submit</button>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            const formElement = document.getElementById('categoryForm');
+            const formData = new FormData(formElement);
+
+            // Send form data to the server (replace with your actual API endpoint)
+            fetch('http://penguinfe.golu.in:7000/brands', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Optionally, you can redirect the user or perform other actions after successful submission.
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle errors, display a message to the user, etc.
+            });
+        }
+    </script>
+</body>
+</html>

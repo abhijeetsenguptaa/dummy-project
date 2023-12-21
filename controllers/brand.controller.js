@@ -1,21 +1,37 @@
+const Brand = require("../models/brand.model");
 const DeleteBrandService = require("../services/brands/DeleteBrandService");
 const FetchBrandService = require("../services/brands/FetchBrandService");
 const PostBrandService = require("../services/brands/PostBrandService");
 const UpdateBrandService = require("../services/brands/UpdateBrandService");
+const multer = require('multer');
+
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, 'uploads/brand-images');
+        },
+        filename: function (req, file, cb) {
+            cb(null, Date.now() + '-' + file.originalname);
+        },
+    }),
+});
 
 async function postBrandController(req, res) {
     try {
+        let logo;
+        if (req.file) {
+            logo = "uploads/brand-images/" + req.file.filename;
+        }
         // Extracting data from the request body
-        const { name, slug, logo, status } = req.body;
+        const { name, slug, status } = req.body;
 
-        // Calling the service to handle brand creation
-        const brandInsert = await PostBrandService(name, slug, logo, status);
+        const brandPost = await Brand.create({ name, slug, logo, status });
 
         // Sending response based on the service result
-        return res.status(brandInsert.status ? 200 : 500).json({
-            status: brandInsert.status,
-            message: brandInsert.message,
-            data: brandInsert.status ? brandInsert.data : null
+        return res.status(200).json({
+            status: true,
+            message: "Brand created successfully.",
+            data: brandPost
         });
     } catch (error) {
         // Handling unexpected errors and logging them
@@ -58,9 +74,9 @@ async function updateBrandController(req, res) {
         const id = req.params.id;
 
         const { name, slug, logo, status } = req.body;
-        
+
         // Calling the service to handle brand data update
-        const updateBrandData = await UpdateBrandService(id, name, slug, logo, status );
+        const updateBrandData = await UpdateBrandService(id, name, slug, logo, status);
 
         // Sending response based on the service result
         return res.status(updateBrandData.status ? 200 : 404).json({
@@ -101,4 +117,4 @@ async function deleteBrandController(req, res) {
     }
 }
 
-module.exports = { postBrandController, fetchBrandController, deleteBrandController, updateBrandController };
+module.exports = { postBrandController, fetchBrandController, deleteBrandController, updateBrandController, upload };
