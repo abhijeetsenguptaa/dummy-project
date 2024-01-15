@@ -76,13 +76,15 @@
       <label for="slug">Slug:</label>
       <input type="text" id="slug" name="slug" required />
 
+      <!-- Fetch the brandID from the api: http://penguinfe.golu.in:7000/brands -->
+      <!-- Fetch the brandID from the api: http://penguinfe.golu.in:7000/brands -->
       <label for="brand_id">Brand ID:</label>
-      <input type="text" id="brand_id" name="brand_id" required />
+      <select id="brand_id" name="brand_id" required></select>
 
       <label for="status">Status:</label>
       <select id="status" name="status" required>
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
+        <option value="true">Active</option>
+        <option value="false">Inactive</option>
       </select>
 
       <label for="year">Year:</label>
@@ -131,11 +133,37 @@
     </form>
 
     <script>
+      // Add this function to fetch brand data
+      async function fetchBrands() {
+        try {
+          const response = await fetch("http://penguinfe.golu.in:7000/brands");
+          const brands = await response.json();
+
+          const brandDropdown = document.getElementById("brand_id");
+
+          // Clear existing options
+          brandDropdown.innerHTML = "";
+
+          // Populate the select dropdown with brand options
+          brands.message.forEach((brand) => {
+            const option = document.createElement("option");
+            option.value = brand.id; // Assuming your brand object has an 'id' property
+            option.text = brand.name; // Assuming your brand object has a 'name' property
+            brandDropdown.add(option);
+          });
+        } catch (error) {
+          console.error("Error fetching brands:", error);
+        }
+      }
+
+      // Use addEventListener to avoid overwriting existing window.onload functions
+      window.addEventListener("load", function () {
+        fetchBrands();
+      });
+
       async function addBrandModel() {
-        const formData = new FormData(
-          document.getElementById("brandModelForm")
-        );
-        const response = await fetch("http://localhost:7000/models", {
+        const formData = new FormData(document.getElementById("brandModelForm"));
+        const response = await fetch("http://penguinfe.golu.in:7000/models", {
           method: "POST",
           body: formData,
         });

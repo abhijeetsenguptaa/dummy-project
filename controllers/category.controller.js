@@ -1,4 +1,5 @@
 const Category = require("../models/category.model");
+const DeleteCategoryService = require("../services/categories/DeleteCategoryService");
 const FetchCategoryService = require("../services/categories/FetchCategoryService");
 const multer = require('multer');
 
@@ -108,5 +109,24 @@ async function fetchCategoriesController(req, res) {
     }
 }
 
+async function deleteCategoriesController(req, res) {
+    try {
+        const id = req.params.id;
 
-module.exports = { upload, fetchCategoriesController, postCategoriesController, updatingCategoriesController }
+        const deleteItem = await DeleteCategoryService(id);
+
+        return res.status(deleteItem.status ? 200 : 404).json({
+            status: deleteItem.status,
+            message: deleteItem.message
+        })
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            status: false,
+            message: 'Internal Server Error'
+        })
+    }
+}
+
+
+module.exports = { upload, fetchCategoriesController, postCategoriesController, updatingCategoriesController, deleteCategoriesController }
