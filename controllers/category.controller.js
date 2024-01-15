@@ -91,8 +91,8 @@ async function updatingCategoriesController(req, res) {
 
 async function fetchCategoriesController(req, res) {
     try {
-        const { id } = req.query;
-        const fetchedData = await FetchCategoryService(id);
+        const { id, sort } = req.query;
+        const fetchedData = await FetchCategoryService(id, sort);
 
         return res.status(fetchedData.status ? 200 : 404).json({
             status: fetchedData.status,

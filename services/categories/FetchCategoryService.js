@@ -1,13 +1,14 @@
 const Category = require("../../models/category.model");
 
-async function FetchCategoryService(id) {
+async function FetchCategoryService(id, sort) {
     try {
         let categories;
 
         if (id) {
             categories = await Category.findAll({ where: { id } });
         } else {
-            categories = await Category.findAll();
+            const sortOrder = sort ? 'DESC' : 'ASC';
+            categories = await Category.findAll({ order: [['sorting_by', sortOrder]] });
         }
 
         if (!categories.length) {
