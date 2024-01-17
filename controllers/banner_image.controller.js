@@ -1,6 +1,7 @@
 const multer = require('multer');
 const Banner_Image = require('../models/banner_images.model');
 const FetchBannerService = require('../services/banners/FetchBannerService');
+const DeleteBannerService = require('../services/banners/DeleteBannerService');
 
 
 const upload = multer({
@@ -17,7 +18,7 @@ const upload = multer({
 async function postingBannerController(req, res) {
     try {
         let image = '';
-        if (req.file){
+        if (req.file) {
             image = 'uploads/banner-images/' + req.file.filename;
         }
 
@@ -61,4 +62,24 @@ async function fetchingBannerController(req, res) {
     }
 }
 
-module.exports = { upload, postingBannerController, fetchingBannerController };
+async function deleteBannerController(req, res) {
+    try {
+        const id = req.params.id;
+
+        const itemToBeDeleted = await DeleteBannerService(id);
+
+        return res.status(itemToBeDeleted.status ? 200 : 404).json({
+            status: itemToBeDeleted.status,
+            message: itemToBeDeleted.message
+        })
+    } catch (error) {
+        // Handling unexpected errors and logging them
+        console.error(error.message);
+        return res.status(500).json({
+            status: false,
+            message: error.message
+        });
+    }
+}
+
+module.exports = { upload, postingBannerController, fetchingBannerController, deleteBannerController };
