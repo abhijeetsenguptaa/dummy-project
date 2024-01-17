@@ -2,6 +2,7 @@ const Category = require("../models/category.model");
 const DeleteCategoryService = require("../services/categories/DeleteCategoryService");
 const FetchCategoryService = require("../services/categories/FetchCategoryService");
 const multer = require('multer');
+const HandleStatusService = require("../services/categories/HandleStatusService");
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -129,4 +130,24 @@ async function deleteCategoriesController(req, res) {
 }
 
 
-module.exports = { upload, fetchCategoriesController, postCategoriesController, updatingCategoriesController, deleteCategoriesController }
+async function statusHandlerController(req, res) {
+    try {
+        const id = req.params.id;
+
+        const itemToBeHandled = await HandleStatusService(id);
+
+        return res.status(itemToBeHandled.status ? 200 : 404).json({
+            status: itemToBeHandled.status,
+            message: itemToBeHandled.message
+        })
+    } catch (error) {
+        // Handling unexpected errors and logging them
+        console.error(error.message);
+        return res.status(500).json({
+            status: false,
+            message: error.message
+        });
+    }
+}
+
+module.exports = { upload, fetchCategoriesController, postCategoriesController, updatingCategoriesController, deleteCategoriesController, statusHandlerController }
