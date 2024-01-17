@@ -5,7 +5,7 @@ const bannerImageRoute = express.Router();
 bannerImageRoute.post('/', upload.single('image'), postingBannerController);
 bannerImageRoute.get('/', fetchingBannerController);
 bannerImageRoute.delete('/:id', deleteBannerController);
-bannerImageRoute.patch('/:id', statusHandlerController);
+bannerImageRoute.post('/status/:id', statusHandlerController);
 
 
 module.exports = bannerImageRoute;

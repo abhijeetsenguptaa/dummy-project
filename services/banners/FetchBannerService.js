@@ -7,7 +7,7 @@ async function FetchBannerService(id) {
             fetchBannerData = await Banner_Image.findOne({ where: { id: id } });
 
         } else {
-            fetchBannerData = await Banner_Image.findAll({ where: { status: true } });
+            fetchBannerData = await Banner_Image.findAll();
         }
 
         return {
