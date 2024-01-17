@@ -16,6 +16,8 @@ async function DeleteBannerService(id) {
             await fs.unlink(deleteItem.image);
         }
 
+        await deleteItem.destroy();
+
         return {
             status: true,
             message: 'Banner deleted successfully.'
