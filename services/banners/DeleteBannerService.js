@@ -13,7 +13,11 @@ async function DeleteBannerService(id) {
         }
 
         if (deleteItem.image) {
-            await fs.unlink(deleteItem.image);
+            try {
+                await fs.unlink(deleteItem.image);
+            } catch (unlinkError) {
+                console.error(`Error deleting image file: ${unlinkError.message}`);
+            }
         }
 
         await deleteItem.destroy();
