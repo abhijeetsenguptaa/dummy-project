@@ -2,6 +2,7 @@ const multer = require('multer');
 const Banner_Image = require('../models/banner_images.model');
 const FetchBannerService = require('../services/banners/FetchBannerService');
 const DeleteBannerService = require('../services/banners/DeleteBannerService');
+const HandleStatusService = require('../services/banners/HandleStatusService');
 
 
 const upload = multer({
@@ -66,11 +67,11 @@ async function deleteBannerController(req, res) {
     try {
         const id = req.params.id;
 
-        const itemToBeDeleted = await DeleteBannerService(id);
+        const itemToBeHandled = await DeleteBannerService(id);
 
-        return res.status(itemToBeDeleted.status ? 200 : 404).json({
-            status: itemToBeDeleted.status,
-            message: itemToBeDeleted.message
+        return res.status(itemToBeHandled.status ? 200 : 404).json({
+            status: itemToBeHandled.status,
+            message: itemToBeHandled.message
         })
     } catch (error) {
         // Handling unexpected errors and logging them
@@ -82,4 +83,24 @@ async function deleteBannerController(req, res) {
     }
 }
 
-module.exports = { upload, postingBannerController, fetchingBannerController, deleteBannerController };
+async function statusHandlerController(req, res) {
+    try {
+        const id = req.params.id;
+
+        const itemToBeHandled = await HandleStatusService(id);
+
+        return res.status(itemToBeHandled.status ? 200 : 404).json({
+            status: itemToBeHandled.status,
+            message: itemToBeHandled.message
+        })
+    } catch (error) {
+        // Handling unexpected errors and logging them
+        console.error(error.message);
+        return res.status(500).json({
+            status: false,
+            message: error.message
+        });
+    }
+}
+
+module.exports = { upload, postingBannerController, fetchingBannerController, deleteBannerController, statusHandlerController };

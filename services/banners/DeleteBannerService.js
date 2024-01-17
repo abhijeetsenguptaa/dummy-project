@@ -15,8 +15,8 @@ async function DeleteBannerService(id) {
         if (deleteItem.image) {
             try {
                 await fs.unlink(deleteItem.image);
-            } catch (unlinkError) {
-                console.error(`Error deleting image file: ${unlinkError.message}`);
+            } catch (error) {
+                console.error(`Error deleting image file: ${error.message}`);
             }
         }
 
