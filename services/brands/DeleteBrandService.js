@@ -13,8 +13,8 @@ async function DeleteBrandService(id) {
             };
         }
 
-        // Assuming you have an 'imagePath' property in the Category model
-        const imagePath = existingBrand.image;
+        // Assuming you have an 'logo' property in the Category model
+        const imagePath = existingBrand.logo;
 
         // Unlink the image file (assuming it's stored locally)
         if (imagePath) {
